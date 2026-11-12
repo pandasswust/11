@@ -1,0 +1,33 @@
+# catkin build artifacts
+build/
+devel/
+logs/
+*.catkin_workspace
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# runtime outputs
+search_data.csv
+*.bag
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.spl
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# large submission documents (kept locally, not in the repo)
+*.docx

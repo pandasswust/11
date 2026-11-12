@@ -1,0 +1,85 @@
+Panels:
+  - Class: rviz/Displays
+    Help Height: 78
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Grid1
+        - /Robot_1_Visual1
+        - /Robot_2_Visual1
+        - /Robot_3_Visual1
+        - /Nuclear_Sources_MultiLayer1
+      Splitter Ratio: 0.5
+    Tree Height: 600
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.3
+      Cell Size: 1
+      Class: rviz/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.03
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 10
+        Y: 10
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 20
+      Reference Frame: world
+      Value: true
+    - Class: rviz/RobotModel
+      Enabled: true
+      Name: Robot_1_Visual
+      Robot Description: robot_description
+      TF Prefix: robot_1
+      Value: true
+    - Class: rviz/RobotModel
+      Enabled: true
+      Name: Robot_2_Visual
+      Robot Description: robot_description
+      TF Prefix: robot_2
+      Value: true
+    - Class: rviz/RobotModel
+      Enabled: true
+      Name: Robot_3_Visual
+      Robot Description: robot_description
+      TF Prefix: robot_3
+      Value: true
+    # ==========================================
+    # 【核心升级】从 Marker 改为 MarkerArray，用于渲染复合态势视觉
+    # ==========================================
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /visualization/nuclear_sources
+      Name: Nuclear_Sources_MultiLayer
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /visualization/particles
+      Name: Probability_Particles
+      Value: true
+    - Class: rviz/Marker
+      Enabled: true
+      Marker Topic: /visualization/voronoi_lines
+      Name: Voronoi_Boundaries
+      Value: true
+  Global Options:
+    # 采用更深邃的背景色，凸显核辐射光晕的荧光感
+    Background Color: 20; 20; 25
+    Fixed Frame: world
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz/Interact
+      Hide Inactive Objects: true
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+Window Geometry:
+  Height: 900
+  Width: 1400

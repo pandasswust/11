@@ -1,0 +1,40 @@
+<launch>
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find nuclear_search)/worlds/nuclear_maze.world"/>
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/> 
+        <arg name="verbose" value="true"/>
+    </include>
+
+    <group ns="robot_1">
+        <param name="robot_description" command="$(find xacro)/xacro '$(find nuclear_search)/urdf/robot_sensors.xacro' robot_name:=robot_1" />
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp">
+            <param name="tf_prefix" value="robot_1" />
+        </node>
+        <node name="spawn_urdf_1" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model robot_1 -x 2.0 -y 2.0 -z 0.5 -Y 0.785" />
+    </group>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="tf_w_r1" args="2.0 2.0 0 0.785 0 0 world robot_1/odom" />
+
+    <group ns="robot_2">
+        <param name="robot_description" command="$(find xacro)/xacro '$(find nuclear_search)/urdf/robot_sensors.xacro' robot_name:=robot_2" />
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp">
+            <param name="tf_prefix" value="robot_2" />
+        </node>
+        <node name="spawn_urdf_2" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model robot_2 -x 18.0 -y 2.0 -z 0.5 -Y 2.356" />
+    </group>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="tf_w_r2" args="18.0 2.0 0 2.356 0 0 world robot_2/odom" />
+
+    <group ns="robot_3">
+        <param name="robot_description" command="$(find xacro)/xacro '$(find nuclear_search)/urdf/robot_sensors.xacro' robot_name:=robot_3" />
+        <node pkg="robot_state_publisher" type="robot_state_publisher" name="rsp">
+            <param name="tf_prefix" value="robot_3" />
+        </node>
+        <node name="spawn_urdf_3" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model robot_3 -x 10.0 -y 18.0 -z 0.5 -Y -1.57" />
+    </group>
+    <node pkg="tf2_ros" type="static_transform_publisher" name="tf_w_r3" args="10.0 18.0 0 -1.57 0 0 world robot_3/odom" />
+
+    <node name="multi_agent_search_node" pkg="nuclear_search" type="multi_agent_aoa_voronoi.py" output="screen" />
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find nuclear_search)/rviz/search_config.rviz" required="false" />
+</launch>
